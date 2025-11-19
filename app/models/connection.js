@@ -1,5 +1,5 @@
-const Sequelize = require("sequelize");
 const db = require("../configs/db");
+const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(db.DATABASE, db.USERNAME, db.PASSWORD, {
     host: db.HOST,
@@ -8,8 +8,8 @@ const sequelize = new Sequelize(db.DATABASE, db.USERNAME, db.PASSWORD, {
         max: db.POOL.MAX,
         min: db.POOL.MIN,
         acquire: db.POOL.ACQUIRE,
-        idle: db.POOL.IDLE
-    }
+        idle: db.POOL.IDLE,
+    },
 });
 
 const connect = {};

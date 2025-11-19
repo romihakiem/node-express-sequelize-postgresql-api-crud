@@ -1,10 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
 
-app.use(cors({
-    origin: "http://localhost:8081"
-}));
+const app = express();
+app.use(
+    cors({
+        origin: "http://localhost:8081",
+    })
+);
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -21,11 +23,15 @@ require("./app/routes/tutorial")(app);
 
 // sync database
 const conn = require("./app/models/connection");
-conn.sequelize.sync().then(() => {
-    console.log("Synced db.");
-}).catch((err) => {
-    console.log(`Failed to sync db: ${err}`);
-});
+conn.sequelize
+    .sync()
+    .then(() => {
+        console.log("Synced db.");
+    })
+    .catch((err) => {
+        console.log(`Failed to sync db: ${err}`);
+        process.exit();
+    });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
